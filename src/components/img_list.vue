@@ -136,7 +136,7 @@ export default {
     }
     .plain {
         left: 0;
-        bottom: 0.1rem;
+        bottom: -0.1rem;
         text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;
     }
     .subtitle {

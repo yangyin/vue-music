@@ -11,4 +11,5 @@ export default {
     'songDetail':'song/detail',//获取音乐详情
     'lyric':'lyric', //歌词
     'playlistDetail':'playlist/detail', //歌单列表
+    'top_artists':'/top/artists',//热门歌手，搜索初始化
 }

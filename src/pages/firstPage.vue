@@ -3,7 +3,10 @@
     <header class="header">
     <TopBar>
         <div class="first_lab">
-            <i class="iconfont icon-liebiao" slot="left" style="font-size:3rem;"></i>
+            <router-link to="/" slot="left">
+                <i class="iconfont icon-liebiao"  style="font-size:3rem;"></i>
+            </router-link>
+            
             <div class="home-lab">
                 <router-link to="/manage" >
                     <i class="iconfont icon-yinle"></i>
@@ -15,7 +18,10 @@
                     <i class="iconfont icon-wode"></i>
                 </router-link>
             </div>
-            <i class="iconfont icon-sousuo" slot="right" style="font-size:2.2rem;"></i>            
+            <router-link to="/search" slot="right">
+                <i class="iconfont icon-sousuo" style="font-size:2.2rem;"></i>      
+            </router-link>
+                  
         </div>
 
         <div slot="next" class="next" v-if="path.includes('/home')">
@@ -81,7 +87,15 @@ export default {
     }
     /*flex头部*/  
     .header{  
-        display: -webkit-box;  
+        display: -webkit-box;
+        a {
+            outline-style: none;
+            text-decoration: none;
+            color: #fff;
+            i {
+                font-size: 2rem;
+            }
+        } 
         .first_lab {
             height: 3rem;
             
@@ -99,12 +113,7 @@ export default {
                     }
                 }
                 a {
-                    outline-style: none;
-                    text-decoration: none;
                     color: #c3c3c3;
-                    i {
-                        font-size: 2rem;
-                    }
                 }
                 a.glayColor {color: #c3c3c3;}
                 a.router-link-active {color: #fff;}
