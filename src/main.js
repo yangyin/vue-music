@@ -9,6 +9,9 @@ import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription' // Disposable if using RxJS4
 import { Subject } from 'rxjs/Subject' // required for domStreams option
 
+import VueScroller from 'vue-scroller'
+
+
 Vue.config.productionTip = false
 
 Vue.use(VueRx, {
@@ -16,6 +19,8 @@ Vue.use(VueRx, {
   Subscription,
   Subject
 })
+
+Vue.use(VueScroller)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

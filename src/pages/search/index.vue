@@ -5,15 +5,17 @@
                 <div class="search_title">
                     <router-link to="/" slot="left">
                         <i class="iconfont icon-iconfontzuojiantou"></i>
+                        
                     </router-link>
                     
                     <div class="home-lab">
-                        <input type="text" placeholder="音乐、视频、歌词、电台"/>
+                        <i class="iconfont icon-sousuo" style="font-size:2.2rem;color:#fff;" @click="change_search()"></i>
+                        <input type="text" placeholder="音乐、视频、歌词、电台" ref="input"/>
                         <p>x</p>  
                     </div>   
                 </div>
-                <div slot="next" class="next">
-                    <div>单曲</div>
+                <div slot="next" class="next" v-if="keywords != ''">
+                    <router-link :to="{path:'/search/single',query: {keywords:keywords}}">单曲</router-link>
                     <div>歌手</div>
                     <div>专辑</div>
                     <div>歌单</div>
@@ -24,85 +26,12 @@
             </TopBar>              
         </header>
         <section class="content">
-            <div>2222222222</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>           
-            <div>11111</div>   
-        </section>        
+            <keep-alive>
+                <router-view />
+            </keep-alive>
+            
+        </section>   
+        <footer>footer 预留位置{{ keywords }}</footer>     
     </div>
 </template>
 
@@ -114,11 +43,19 @@ import api from '../../http/api';
 export default {
     data() {
         return {
-
+            keywords:''
         }
     },
     components:{
         TopBar
+    },
+    methods: {
+        change_search() {
+            let DinputVal = this.$refs.input.value;
+
+            DinputVal != '' ? this.keywords = DinputVal :this.keywords = '';
+
+        }
     },
     subscriptions() {
         /**@argument
@@ -143,9 +80,9 @@ export default {
             .home-lab {
                 flex: 8;height: 100%;line-height: 3rem;
                 border-bottom: 1px solid #ff8383;
-                position: relative;
+                position: relative; display: flex;
                 input {
-                    width: 90%;height: 100%;outline: none;border: none;background: none;color:#fff;
+                    width: 90%;height: 100%;outline: none;border: none;background: none;color:#fff;padding-left: 1%;
                 }
                 input::-webkit-input-placeholder { /* WebKit browsers */
                     color:#ffc9c9;

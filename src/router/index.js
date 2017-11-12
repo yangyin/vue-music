@@ -39,7 +39,12 @@ export default new Router({
         // next();
       }
     },
-    {path:'/search',component:resolve => require(['../pages/search'], resolve)}
+    {
+      path:'/search',component:resolve => require(['../pages/search'], resolve),
+      children:[
+        {path:'single',component:resolve => require(['../pages/search/single'], resolve)}
+      ]
+    }
 
     // {path:'/',redirect:'index'},
 
