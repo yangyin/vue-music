@@ -91,7 +91,7 @@ export default {
         http.get(api['personalized_mv'])
         .map(data =>data.result)
         .subscribe(data => {
-            console.log(data)
+            // console.log(data)
             const obj = {
                 data:data,
                 icon:'icon-weibiaoti1',

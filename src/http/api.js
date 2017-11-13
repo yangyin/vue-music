@@ -6,7 +6,8 @@ export default {
     'privatecontent':'personalized/privatecontent', //独家放送
     'mvid':'mv',//根据ID，获取视频内容，参数 mvid,
     'banner':'banner',//首页轮播图,
-    'search':'search',//搜索建议
+    'search_suggest':'/search/suggest',//搜索建议
+    'search':'search',//搜索
     'musicUrl':'music/url',//获取音乐url
     'songDetail':'song/detail',//获取音乐详情
     'lyric':'lyric', //歌词

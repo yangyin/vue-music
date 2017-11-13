@@ -23,7 +23,7 @@ export default new Router({
           path:'home',component:Home,
           children:[
             {path:'music',component:HomeMusic},
-            {path:'video',component:resolve =>  (['../pages/home/video'], resolve)},
+            {path:'video',component:resolve =>  require(['../pages/home/video'], resolve)},
             {path:'radio_station',component:resolve => require(['../pages/home/radio_station'], resolve)}
           ],
           beforeEnter:(to,from,next) => {
@@ -36,7 +36,6 @@ export default new Router({
       beforeEnter:(to,from,next) =>{
         // console.log(to.path)
         to.path == '/' ? next({path:'home'}) :next();
-        // next();
       }
     },
     {

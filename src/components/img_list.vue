@@ -58,11 +58,11 @@ export default {
             }
             
             if(typeof val.isIcon != 'undefined') { // 是否显示icon
-                console.log(val.isIcon)
+                // console.log(val.isIcon)
                 this.isIcon = val.isIcon;
             }
             if(typeof val.isPlain != 'undefined') { // 是否显示说明
-                console.log(val.isIcon)
+                // console.log(val.isIcon)
                 this.isPlain = val.isPlain;
             }
             
