@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <scroller :on-refresh="refresh" :on-infinite="infinite">
+    <scroller :on-infinite="infinite"  :on-refresh="refresh" ref="myscroller">
         <ul class="list">
             <li v-for="item of items" :key="item.id">
                 <div>
@@ -13,8 +12,7 @@
                 <div>...</div>
             </li>
         </ul>
-    </scroller>     
-  </div>
+    </scroller>
 </template>
 
 <script>
@@ -25,7 +23,8 @@ import api from '../../http/api';
 export default {
     data() {
         return {
-            total:0,//总数
+            total:0,//总页数
+            current_page:0,//当前页
             items:[],//列表数组
         }
     },
@@ -38,18 +37,64 @@ export default {
         http.get(api['search'],query)
         .map(data =>data.result)
         .subscribe(data =>{
-            console.log(data)
-            this.total = data.songCount;
+            // console.log('****************************')
+            // console.log(data)
+            this.total = Math.ceil( data.songCount/30 );
             this.items = data.songs;
+            this.current_page++;
         })
     },
     methods: {
         refresh (done) {
             //刷新回调
+            // console.log(2222222222)
+            setTimeout(function() {
+                done(true)
+            },1000)
         },
 
-        infinite (done) {
+        infinite(done) {
             //无限加载回调
+            // console.log('==============================')
+            // console.log('total   ',this.total);
+            // console.log('current   ',this.current_page);
+            if(this.current_page >= this.total) {
+                setTimeout(() => {
+                    done(true);
+                })
+                return;
+            }
+
+            let query = this.$route.query;
+            query.type =1;
+            query.offset = this.current_page*30;
+
+            http.get(api['search'],query)
+            .map(data => {this.current_page++;return data;})
+            .flatMap(data =>data.result.songs)
+            .subscribe(data => {
+                // console.log(data)
+                this.items.push(data);
+                setTimeout( () => {
+                    done();
+                })
+            })
+        },
+        get_service() {
+            let query = this.$route.query;
+            query.type =1;
+            query.offset = this.current_page*30;
+
+            http.get(api['search'],query)
+            .map(data => {this.current_page++;return data;})
+            .flatMap(data =>data.result.songs)
+            .subscribe(data => {
+                // console.log(data)
+                this.items.push(data);
+                setTimeout( () => {
+                    done();
+                })
+            })            
         }        
     },
     filters: {

@@ -15,7 +15,7 @@
                 </div>
                 <div slot="next" class="next" v-if="keywords != ''">
                     <router-link :to="{path:'/search/single',query: {keywords:keywords}}">单曲</router-link>
-                    <div>歌手</div>
+                    <router-link :to="{path:'/search/singer',query: {keywords:keywords}}">歌手</router-link>
                     <div>专辑</div>
                     <div>歌单</div>
                     <div>视频</div>
@@ -25,9 +25,9 @@
             </TopBar>              
         </header>
         <section class="content">
-            <keep-alive v-if="is_router">
+            <!-- <keep-alive v-if="is_router"> -->
                 <router-view />
-            </keep-alive>
+            <!-- </keep-alive> -->
             
         </section>   
         <footer>footer 预留位置{{ keywords }}</footer>  
@@ -135,7 +135,15 @@ function formatResult(res) {
                 }
             }
         }
-        .next {height: 3rem;width: 100%;display: flex;justify-content:space-around;align-items: center;}        
+        .next {
+            height: 3rem;width: 100%;display: flex;justify-content:space-around;align-items: center;
+            a {
+                outline: none;color: #2c3e50;
+            }
+            a.router-link-active {
+                color: red;
+            }
+        }        
     }
     header *{  
         display: block;  
