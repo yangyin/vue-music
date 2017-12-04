@@ -111,6 +111,9 @@ export default {
         display: flex;justify-content: space-between;padding: 3%;
         div:first-child {
             width: 80%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+            p {
+                font-size: 1.5rem;
+            }
         }
         
     }
