@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Video></Video>
+    <AudioComponent></AudioComponent>
     <keep-alive>
       <router-view/>
     </keep-alive>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Video from '../../components/video/index';
+import AudioComponent from '../../components/audio';
 export default {
   data() {
     return {
@@ -17,7 +17,7 @@ export default {
     }
   },
   components: {
-    Video
+    AudioComponent
   }
 }
 </script>
