@@ -20,7 +20,8 @@ Vue.use(VueRx, {
   Subject
 })
 
-Vue.use(VueScroller)
+Vue.use(VueScroller);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
