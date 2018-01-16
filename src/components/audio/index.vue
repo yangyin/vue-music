@@ -16,7 +16,9 @@
             </div>
             <div><i class="iconfont icon-fenxiang"></i></div>
         </div>
-        <div class="content">111</div>
+        <div class="content">
+            <audioImg></audioImg>
+        </div>
         <div class="footer">
             <footer-component></footer-component>
         </div>
@@ -30,6 +32,7 @@
 
 
 import footerComponent from './footer-component';
+import audioImg from './audio-img.vue';
 export default {
     data() {
         return {
@@ -37,7 +40,7 @@ export default {
         }
     },
     components: {
-        footerComponent
+        footerComponent,audioImg
     }
 }
 </script>

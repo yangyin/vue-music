@@ -143,7 +143,7 @@ export default {
                 border-bottom: 1px solid #fff;
                 a {
                     text-decoration: none;
-                    font-size: 0.1rem;
+                    font-size: 1rem;
                     color: #7b7474;
                     display: block;
                     width: 100%;
