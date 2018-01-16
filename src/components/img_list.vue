@@ -49,6 +49,11 @@ export default {
     mounted () {
         // console.log(this.$props.msg)
     },
+    methods: {
+        handleSongSheet(id) {
+            this.$router.push({ name: 'song_sheet',query:{id:id}});
+        }
+    },
     watch: {
         'message':function(val) {
             this.data = val;

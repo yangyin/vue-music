@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AudioComponent></AudioComponent>
+    <!-- <AudioComponent></AudioComponent> -->
     <keep-alive>
       <router-view/>
     </keep-alive>

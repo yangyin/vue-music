@@ -54,8 +54,7 @@ export default new Router({
         path: 'home'
       }) : next();
     }
-  },
-    {
+  },{
       path: '/search',
       component: resolve => require(['../pages/search'], resolve),
       children: [{
@@ -67,7 +66,11 @@ export default new Router({
           component: resolve => require(['../pages/search/singer'], resolve)
         },
       ]
-    }
+  },{
+    path: '/song_sheet',
+    name:'song_sheet',
+    component: resolve => require(['../components/song-sheet/index.vue'], resolve)
+  }
 
     // {path:'/',redirect:'index'},
 
