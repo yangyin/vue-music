@@ -133,6 +133,7 @@ export default {
         }
         .next{
             display: flex;height: 3rem;
+            background: #fff;
             justify-content: space-around;align-items: center;
             div {
                 width: 33.3%;

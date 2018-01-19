@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store';
 
 import VueRx from 'vue-rx'
 import { Observable } from 'rxjs/Observable'
@@ -26,6 +27,7 @@ Vue.use(VueScroller);
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

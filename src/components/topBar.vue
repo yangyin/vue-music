@@ -1,8 +1,11 @@
 <template>
       <div class="home">
-        <slot name="left"></slot>
-          <slot></slot>
-        <label><slot name="right"></slot></label>
+        <div class="a">
+          <slot name="left"></slot>
+            <slot></slot>
+          <label><slot name="right"></slot></label>          
+        </div>
+
         <slot name="next"></slot>
       </div>
 </template>
@@ -15,6 +18,7 @@ export default {
 
 <style scoped lang="scss">
   .home{width: 100%;}
+  .a{padding: 2% 0;background: red;}
   // .home{display: flex;width: 100%;justify-content:space-around;background-color: red;height: 0.6rem;align-items: center;color: #fff;}
 //   .home-lab{
 //     width: 70%;display: flex;justify-content: center;

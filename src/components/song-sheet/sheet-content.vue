@@ -35,7 +35,7 @@
             <div class="filter" :style="`background-image: url(${data.coverImgUrl});`"></div>
         </div>
         <transition name="fade">
-            <ul v-if="show" class="list" @click="handleLi($event)">
+            <ul class="list" @click="handleLi($event)">
                 <li v-for="(item,index) in data.tracks" :key="item.id" :data-id="item.id">
                     <div :data-id="item.id">{{index + 1}}</div>
                     <div class="list_com" :data-id="item.id">
@@ -56,22 +56,17 @@
 export default {
     data() {
         return {
-            data:this.$props.childData,
-            show:false
+            data:this.$props.childData
         }
     },
     props:['childData'],
     methods:{
         handleLi(event) {
             let id = event.target.getAttribute('data-id');
-            // console.log(id)
-            this.show = false;
-            this.$router.push({ name: 'audio', params: { id: id }});
+            this.$emit('select-type', id);
         }
     },
     mounted() {
-        this.show = true;
-        console.log('***********',this.data)
     },
     destroyed () {
         
@@ -119,13 +114,12 @@ export default {
     }
 }
 
-.list{margin-bottom: 100px;}
 .list>li{display: flex;align-content: center;width: 100%;border-bottom: 1px solid #eee;padding: 2% 0;}
 .list>li>div{align-self: center;}
 .list div:first-child{width:10%;text-align: center;}
 .list div:last-child{width: 10%;}
-.list_com{width:80%;}
-.list_com label{font-size: 0.12rem;color: #888;}
+.list_com{width:80%;font-size: 1.3rem;}
+.list_com label{font-size:0.9rem;color: #888;}
 
 .fade-enter-active {
   transition: all .5s ease;

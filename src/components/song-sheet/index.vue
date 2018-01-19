@@ -24,7 +24,7 @@
     </header> 
     <div class="content">
         <keep-alive v-if="data.playlist">
-            <SheetContent :child-data="data.playlist"></SheetContent>
+            <SheetContent :child-data="data.playlist" @select-type="onSelectType"></SheetContent>
         </keep-alive>
         
     </div>
@@ -53,9 +53,16 @@ export default {
         let id = this.$route.query.id;
         let responseData = await http.get(api['playlistDetail'],{id:id}).toPromise();
            
-        console.log('******responseData*****',responseData);
+        // console.log('******responseData*****',responseData);
         this.data = responseData;
            
+    },
+    methods: {
+        onSelectType (id) {
+            console.log('******',id);
+            // this.$store.modules.songInfo.dispatch
+            // this.$store.dispatch('getSongsData',id);
+        }
     }
 
 }
