@@ -9,7 +9,7 @@
                     </router-link>
                     <div>
                         <p>歌单</p>
-                        <label>{{playlist.name}}</label>
+                        <label  v-if="data.playlist">{{data.playlist.name}}</label>
                     </div>
                 </div>
                 
@@ -23,7 +23,10 @@
         </TopBar>              
     </header> 
     <div class="content">
-        <SheetContent v-if="playlist" :child-data="playlist"></SheetContent>
+        <keep-alive v-if="data.playlist">
+            <SheetContent :child-data="data.playlist"></SheetContent>
+        </keep-alive>
+        
     </div>
     <footer class="footer">
         footer 预留位置
@@ -40,19 +43,19 @@ import SheetContent from './sheet-content';
 export default {
     data() {
         return {
-            playlist:{},
+            data:{},
         }
     },
     components: {
         TopBar,SheetContent
     },
-    created () {
+    async created () {
         let id = this.$route.query.id;
-        http.get(api['playlistDetail'],{id:id})
-            .subscribe(data => {
-                console.log( data);
-                this.playlist = data.playlist;
-            })
+        let responseData = await http.get(api['playlistDetail'],{id:id}).toPromise();
+           
+        console.log('******responseData*****',responseData);
+        this.data = responseData;
+           
     }
 
 }
@@ -90,7 +93,7 @@ export default {
             }
             label {
                 font-size: 0.1rem;
-                color: #d4bcbc;
+                color: #efefef;
             }
         }
     }
@@ -104,6 +107,7 @@ export default {
 }
 .content {
     flex: 1;
+    overflow: auto;
 }
 .footer {
     width: 100%;

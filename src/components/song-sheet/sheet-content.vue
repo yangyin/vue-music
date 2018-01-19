@@ -40,7 +40,7 @@
                     <div :data-id="item.id">{{index + 1}}</div>
                     <div class="list_com" :data-id="item.id">
                         <p :data-id="item.id">{{item.name}}</p>
-                        <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}}/ - {{item.name}}</label>
+                        <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}}-{{item.name}} / </label>
                     </div>
                     <div>
                         <i class="iconfont icon-fengexianICONCopy" :data-id="item.id"></i>
@@ -71,6 +71,7 @@ export default {
     },
     mounted() {
         this.show = true;
+        console.log('***********',this.data)
     },
     destroyed () {
         
@@ -78,25 +79,45 @@ export default {
 }
 </script>
 
-<style scoped>
-.top{margin-top: 19px;}
-.top_info{width: 100%;height: 3rem;position: relative;background-color: rgba(64,46,32,.58);color:#fff;}
-.filter{
-    width: 100%;height:100%;background-size: 100% 100%;filter:opacity(60%);background-repeat: no-repeat;
-    position: absolute;top:0;left:0;z-index: -1;
+<style lang="scss" scoped>
+.top_info{
+    width: 100%;height: 20rem;position: relative;color:#fff;background-color: rgba(0,0,0,.5);
+    .top_cont {
+        display: flex;margin: 0 5%;height: 15rem;
+        .top_left {
+            width:30%;align-self: center;
+            img {
+                width: 100%;
+            }
+        }
+        .top_right {
+            width: 70%;margin-left: 1rem;align-self: center;
+            h3 {
+                font-weight: normal;font-size: 1.6rem;
+            }
+            .songlist-avatar-img {
+                margin-top: 1rem;
+                img {
+                    width: 3rem;height: 3rem;border-radius: 50%;margin-right: 5%;vertical-align: middle;
+                }
+                span {
+                    font-size: 1rem;vertical-align: middle;
+                }
+            }
+        }
+    }
+    .top_bar{
+        height: 5rem;display: flex;justify-content: space-around;align-content: center;margin-top: 0.3rem;
+        div {
+            text-align: center;
+            line-height: 1.5rem;
+        }
+    }
+    .filter{
+        width: 100%;height: 100%;background-size: 100% 100%;filter:opacity(50%);background-repeat: no-repeat;
+        position: absolute;top:0;left:0;z-index: -1;
+    }
 }
-.top_cont{display: flex;margin: 0 5%;height: 2rem;}
-.top_bar{height: 1rem;display: flex;justify-content: space-around;align-content: center;margin-top: 0.3rem;}
-.top_bar>div {text-align: center;font-size: 0.16rem;}
-.top_bar>div>p{font-size: 0.14rem;margin-top: 2%;}
-
-.top_left{width:30%;align-self: center;}
-.top_left img {width: 100%;}
-.top_right{width: 70%;margin-left: .3rem;align-self: center;}
-.top_right h3 {font-weight: normal;font-size: .24rem;}
-.songlist-avatar-img {margin-top: .26rem;}
-.songlist-avatar-img img {width: .48rem;height: .48rem;border-radius: 50%;margin-right: 5%;vertical-align: middle;}
-.songlist-avatar-img span {font-size: 0.12rem;vertical-align: middle;}
 
 .list{margin-bottom: 100px;}
 .list>li{display: flex;align-content: center;width: 100%;border-bottom: 1px solid #eee;padding: 2% 0;}
