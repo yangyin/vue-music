@@ -1,6 +1,6 @@
 
 /**
- * 歌曲相关内容，
+ * 歌单相关内容
  */
 import songInfoAction from './song-info-action';
 import * as type from './song-info-type';

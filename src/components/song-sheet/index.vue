@@ -61,7 +61,7 @@ export default {
         onSelectType (id) {
             console.log('******',id);
             // this.$store.modules.songInfo.dispatch
-            // this.$store.dispatch('getSongsData',id);
+            this.$store.dispatch('songInfo/getSongsData',id);
         }
     }
 

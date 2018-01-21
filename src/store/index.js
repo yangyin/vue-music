@@ -5,7 +5,8 @@ import state from './state';
 import mutations from './mutations.js';
 import getters from './getters';
 import actions from './actions';
-import songInfo from './module/song-info';
+import songInfo from './module/song-info/song-info.js';
+import auditionInfo from './module/audition/index.js';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
-    songInfo
+    songInfo,
+    auditionInfo
   }
 })
