@@ -6,12 +6,15 @@ const mutations = {
         state.audioPlay.id = val.id;
         state.audioPlay.url = val.url;
         state.audioPlay.details = val.details;
-        console.log('module mutations ****',val)
+        // console.log('module mutations ****',val)
         state.isPlay = true;
     },
     [type.PLAYSTATUS](state,val) {
         
         state.isPlay = val;
+    },
+    [type.FOOTERLIST](state,val) {
+        state.footerList = val;
     }
 }
 

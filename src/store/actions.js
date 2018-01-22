@@ -31,6 +31,9 @@ const actions = {
      */
     playStatus(context,val) {
         context.commit(type.PLAYSTATUS,val);
+    },
+    footerList(context,val) {
+        context.commit(type.FOOTERLIST,val);
     }
 }
 

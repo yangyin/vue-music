@@ -3,13 +3,24 @@
     <div class="group-page" :class=" isClass ? 'addMove' : 'removeMove' ">
         <div class="title">
             <div class="left">
-                <p><i class="iconfont icon-shunxubofang"></i>列表循环（58）</p>
+                <p><i class="iconfont icon-shunxubofang"></i>列表循环（{{$store.state.footerList.length}}）</p>
             </div>
             <div class="right">
                 <span><i class="iconfont icon-wenjianjia"></i>收藏全部</span>
                 <span><i class="iconfont icon-shanchu"></i></span>
             </div>
         </div>
+        <ul class="list" @click="handleLi($event)">
+            <li v-for="(item,index) in $store.state.footerList" :key="item.id" :data-id="item.id">
+                <div class="list_com" :data-id="item.id">
+                    <p :data-id="item.id">{{item.name}}</p>
+                    <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}}/ </label>
+                </div>
+                <div class="list-right">
+                    <i>X</i>
+                </div>
+            </li>
+        </ul> 
     </div>
 </div>
 </template>
@@ -29,6 +40,9 @@ export default {
                    this.$emit('close-bg',false); 
                },500)
             }
+        },
+        handleLi(e) {
+            console.log(e)
         }
     }
 }
@@ -80,6 +94,36 @@ export default {
                 }
                 span:last-child {
                     margin-left: .5rem;
+                }
+            }
+        }
+        .list {
+            height: 30rem;
+            overflow-y: auto;
+            li {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 0;
+                border-bottom: 1px solid #f1f1f1;
+                .list_com{
+                    display: flex;
+                    box-sizing: border-box;
+                    width: 80%;
+                    margin-left: .5rem;
+                    p  {
+                        margin-right: 1rem;
+                    }
+                    label {
+                        overflow: hidden;/*内容超出后隐藏*/
+                        text-overflow: ellipsis;/* 超出内容显示为省略号*/
+                        white-space: nowrap;/*文本不进行换行*/
+                    }
+                }
+                .list-right {
+                    width: 10%;
+                    box-sizing: border-box;
+                    text-align: center;
                 }
             }
         }

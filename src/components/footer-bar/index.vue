@@ -32,8 +32,10 @@ export default {
     data() {
         return {
             groupStatus:false, //是否显示右侧弹出栏目 
+            list:this.$props.message
         }
     },
+    props:['message'],
     components: {
         GroupPage
     },
@@ -60,7 +62,15 @@ export default {
             点击列表展示
         */ 
         hanleList() {
-            // console.log(1111111)
+            /**
+             * 把底部列表页的歌单数据存储在store中footerList,与试听共存在一个字段
+             */
+            // console.log('message********',this.$props.message)
+            // console.log('list*******',this.list)
+            if(this.$props.message.tracks) {
+                this.$store.dispatch('footerList',this.$props.message.tracks);
+            }
+            
             this.groupStatus = true;
         },
          closeDialog(val) {
@@ -69,7 +79,10 @@ export default {
     },
     watch: {
         '$store.state.audioPlay.details':(newVal,oldVal) => {
-            console.log('newVal****',newVal);
+            // console.log('newVal****',newVal);
+        },
+        'message':(val,old) => {
+            // console.log('val****',val);
         }
     }
 }
@@ -108,6 +121,8 @@ export default {
     .right {
         width: 20%;
         box-sizing: border-box;
+        text-align: right;
+        margin-right: 1rem;
         i {
             font-size: 3rem;
             font-weight: 100;

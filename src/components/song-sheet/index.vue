@@ -29,7 +29,7 @@
         
     </div>
     <footer class="footer" v-if="$store.state.audioPlay.details">
-        <FooterBar></FooterBar>
+        <FooterBar :message="dialogList"></FooterBar>
     </footer>   
   </div>
 </template>
@@ -44,7 +44,10 @@ import FooterBar from '../footer-bar';
 export default {
     data() {
         return {
-            data:{},
+            data:{
+                
+            },
+            dialogList:{}
         }
     },
     components: {
@@ -53,16 +56,13 @@ export default {
     async created () {
         let id = this.$route.query.id;
         let responseData = await http.get(api['playlistDetail'],{id:id}).toPromise();
-           
-        // console.log('******responseData*****',responseData);
-        this.data = responseData;
-
-         
-           
+        this.data = responseData;  
     },
     methods: {
         onSelectType (id) {
-            // console.log('******',id);
+            
+            this.dialogList = this.data.playlist;
+            // console.log('dialogList******',this.dialogList);
             // this.$store.dispatch('songInfo/getSongsData',id);
             //播放器播放单曲，所以store到公共区域
             this.$store.dispatch('getSongsData',id);
@@ -72,9 +72,7 @@ export default {
        
     },
     watch: {
-        '$store.state.songInfo.songs':function(old,val) {
-            console.log('watch****',val);
-        }
+        
     }
 
 }
