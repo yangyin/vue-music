@@ -28,8 +28,8 @@
         </keep-alive>
         
     </div>
-    <footer class="footer">
-        footer 预留位置
+    <footer class="footer" v-if="$store.state.audioPlay.details">
+        <FooterBar></FooterBar>
     </footer>   
   </div>
 </template>
@@ -40,6 +40,7 @@ import api from '../../http/api';
 
 import TopBar from '../topBar.vue';
 import SheetContent from './sheet-content';
+import FooterBar from '../footer-bar';
 export default {
     data() {
         return {
@@ -47,7 +48,7 @@ export default {
         }
     },
     components: {
-        TopBar,SheetContent
+        TopBar,SheetContent,FooterBar
     },
     async created () {
         let id = this.$route.query.id;
@@ -55,13 +56,24 @@ export default {
            
         // console.log('******responseData*****',responseData);
         this.data = responseData;
+
+         
            
     },
     methods: {
         onSelectType (id) {
-            console.log('******',id);
-            // this.$store.modules.songInfo.dispatch
-            this.$store.dispatch('songInfo/getSongsData',id);
+            // console.log('******',id);
+            // this.$store.dispatch('songInfo/getSongsData',id);
+            //播放器播放单曲，所以store到公共区域
+            this.$store.dispatch('getSongsData',id);
+            // this.$store.dispatch('playStatus',true);
+
+        },
+       
+    },
+    watch: {
+        '$store.state.songInfo.songs':function(old,val) {
+            console.log('watch****',val);
         }
     }
 
@@ -118,8 +130,6 @@ export default {
 }
 .footer {
     width: 100%;
-    height: 30px;
-    background: red;
 }
 
 </style>

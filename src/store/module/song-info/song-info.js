@@ -7,14 +7,11 @@ import * as type from './song-info-type';
 const songInfo = {
     namespaced: true,
     state:{
-        songsData:''
+        songs:{}
 
     },
     mutations: {
-        [type.GETSONGSDATA](state,val) {
-            console.log('module mutations ****',val)
-            state.songsData = val;
-        }
+
     },
     actions:songInfoAction,
     getters: {

@@ -3,13 +3,21 @@
     <!-- <div id="loading">
       <img src="../static/img/loading.gif" alt="">
     </div> -->
+    <AudioPlay></AudioPlay>
     <router-view/>
   </div>
 </template>
 
 <script>
+import AudioPlay from './components/audio/audio';
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    AudioPlay
+  },
+  watch: {
+
+  }
 }
 </script>
 

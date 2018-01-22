@@ -1,10 +1,11 @@
 <template>
+<div>
     <div class="content" @click="handleCont">
         <div class="left">
-            <img :src="singleDetails.al.picUrl" alt="">
+            <img :src="$store.state.audioPlay.details[0].al.picUrl" alt="">
                 <p>
-                    {{singleDetails.name}}
-                    <span v-for="(item,index) in singleDetails.ar" :key="index">
+                    {{$store.state.audioPlay.details[0].name}}
+                    <span v-for="(item,index) in $store.state.audioPlay.details[0].ar" :key="index">
                         {{item.name}}
                     </span>
                     
@@ -12,21 +13,29 @@
         </div>
         <div class="right">
             <label class="tog_icon">
-                <i class="iconfont icon-zanting" v-if="$store.state.playInfo.type" @click.stop="play"></i>
-                <i class="iconfont icon-bofang" v-else @click.stop="pause"></i>
+                <i class="iconfont icon-zanting1" v-if="$store.state.isPlay" @click.stop="play"></i>
+                <i class="iconfont icon-bofang1" v-else @click.stop="pause"></i>
             </label>
             <i class="iconfont icon-fenzu" @click.stop="hanleList"></i>
         </div>
-
     </div>
+    <div v-if="groupStatus">
+        <GroupPage @close-bg="closeDialog"></GroupPage>
+    </div>
+</div>
+
 </template>
 
 <script>
+import GroupPage from './group-page'
 export default {
     data() {
         return {
-            singleDetails: this.$store.state.singleDetails
+            groupStatus:false, //是否显示右侧弹出栏目 
         }
+    },
+    components: {
+        GroupPage
     },
     computed: {
 
@@ -36,10 +45,10 @@ export default {
     },
     methods: {
         play() {
-            // this.$store.dispatch('play_type',false);
+            this.$store.dispatch('playStatus',false);
         },
         pause() {
-            // this.$store.dispatch('play_type',true);
+            this.$store.dispatch('playStatus',true);
         },
         /*
             点击全局，显示到播放页面 <audio>
@@ -51,59 +60,58 @@ export default {
             点击列表展示
         */ 
         hanleList() {
-
+            // console.log(1111111)
+            this.groupStatus = true;
+        },
+         closeDialog(val) {
+            this.groupStatus = false;
         }
     },
     watch: {
-
+        '$store.state.audioPlay.details':(newVal,oldVal) => {
+            console.log('newVal****',newVal);
+        }
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .content {
-
-    position: fixed;
-    left: 0;
-    bottom: 50px;
-    z-index: 999;
     width: 100%;
-    background: #ddd;
+    height: 50px;
+    box-shadow:  -2px -2px 3px #ddd;
     display: flex;
     align-items: center;
-    align-content: center;
     justify-content: center;
-}
-
-.content div {
-    height: 50px;
-    line-height: 50px;
-}
-
-.left {
-    flex-grow: 3;
-    margin-left: 3%;
-    color: #fff;
-}
-
-.left img {
-    width: 0.6rem;
-    height: 0.6rem;
-    vertical-align: middle;
-}
-.left p{display: inline-block;}
-.left span {font-size: 12px;}
-
-.right {
-    flex-grow: 1;
-    margin-right: 3%;
-    text-align: right;
-    line-height: 50px;
-}
-
-.icon-zanting,
-.icon-bofang,
-.icon-fenzu {
-    font-size: 0.5rem;
+    .left {
+        width: 80%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 1rem;
+        img {
+            width: 3rem;
+        }
+        p {
+            display: flex;
+            flex-direction: column;
+            font-size: 1.2rem;
+            color: #000;
+            margin-left: 1rem;
+            span {
+                font-size: .5rem;
+                color: #666;
+            }
+        }
+    }
+    .right {
+        width: 20%;
+        box-sizing: border-box;
+        i {
+            font-size: 3rem;
+            font-weight: 100;
+        }
+    }
 }
 </style>
