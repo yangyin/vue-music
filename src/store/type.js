@@ -12,3 +12,8 @@ export const PLAYSTATUS = 'PALYSTATUS';
  * 底部 播放条 列表页
  */
 export const FOOTERLIST = 'FOOTERLIST';
+
+/**
+ * 播放器详情页 是否显示
+ */
+export const AUDIOPAGESTATUS = 'AUDIOPAGESTATUS';

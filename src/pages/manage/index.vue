@@ -26,15 +26,15 @@
   <div class="recommend">
     <p>推荐歌单</p>
     <div class="recommend-list">
-      <div>
+      <div data-id="1979071427">
         <img src="http://p1.music.126.net/GhhuF6Ep5Tq9IEvLsyCN7w==/18708190348409091.jpg" alt="">
         <p>云音乐热歌榜</p>
       </div>
-      <div>
+      <div data-id="37432514">
         <img src="http://p3.music.126.net/mQy3lRj6YJ0TW3fM9v85YA==/6643249256145165.jpg?param=200y200" alt="">
         <p>那些只听前奏就中毒的英文歌</p>
       </div>
-      <div>
+      <div data-id="2039073542">
         <img src="http://p4.music.126.net/AZEa0RlZxNkxWAi0wpDI4w==/109951163097632993.jpg?param=200y200" alt="">
         <p>2017年度最热新歌TOP100</p>
       </div>

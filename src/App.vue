@@ -4,16 +4,18 @@
       <img src="../static/img/loading.gif" alt="">
     </div> -->
     <AudioPlay></AudioPlay>
+    <AudioPage></AudioPage>
     <router-view/>
   </div>
 </template>
 
 <script>
 import AudioPlay from './components/audio/audio';
+import AudioPage from './components/audio';
 export default {
   name: 'app',
   components: {
-    AudioPlay
+    AudioPlay,AudioPage
   },
   watch: {
 

@@ -40,7 +40,10 @@
                     <div :data-id="item.id">{{index + 1}}</div>
                     <div class="list_com" :data-id="item.id">
                         <p :data-id="item.id">{{item.name}}</p>
-                        <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}}-{{item.name}} / </label>
+                        <span>
+                            <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}}-{{item.name}}</label>
+                        </span>
+                        
                     </div>
                     <div>
                         <i class="iconfont icon-fengexianICONCopy" :data-id="item.id"></i>
@@ -118,8 +121,27 @@ export default {
 .list>li>div{align-self: center;}
 .list div:first-child{width:10%;text-align: center;}
 .list div:last-child{width: 10%;}
-.list_com{width:80%;font-size: 1.3rem;}
-.list_com label{font-size:0.9rem;color: #888;}
+.list_com{width:80%;font-size: 1.3rem;overflow: hidden;}
+
+.list_com {
+    span {
+        label{
+            font-size:0.9rem;color: #888;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }        
+    }
+
+}
+
+.list_com label:after {
+    content: '/';
+    margin: 0 .3rem;
+}
+.list_com label:last-child::after {
+    display: none;
+} 
 
 .fade-enter-active {
   transition: all .5s ease;

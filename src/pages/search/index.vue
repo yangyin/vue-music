@@ -3,7 +3,7 @@
         <header>
             <TopBar>
                 <div class="search_title">
-                    <router-link to="/" slot="left">
+                    <router-link to="/home/music" slot="left">
                         <i class="iconfont icon-iconfontzuojiantou"></i>
                     </router-link>
                     
@@ -30,7 +30,9 @@
             <!-- </keep-alive> -->
             
         </section>   
-        <footer>footer 预留位置{{ keywords }}</footer>  
+        <footer>
+            <FooterBar></FooterBar>
+        </footer>  
         <div class="search_suggest" v-if="is_search_suggest">
             <p v-if="search != ''" @click="change_search(search)">搜索"{{search}}"</p>
             <ul>
@@ -45,6 +47,7 @@
 
 <script>
 import TopBar from '../../components/topBar.vue';
+import FooterBar from '../../components/footer-bar';
 
 import http from '../../http';
 import api from '../../http/api';
@@ -58,7 +61,7 @@ export default {
         }
     },
     components:{
-        TopBar
+        TopBar,FooterBar
     },
     methods: {
         change_search(val) {

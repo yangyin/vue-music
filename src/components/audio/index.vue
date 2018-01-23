@@ -1,17 +1,17 @@
 <template>
-    <div id="video">
+    <div id="video" v-if="$store.state.audioPageStatus">
         <div class="header">
             <div>
-                <label>
+                <label @click="goBack">
                     <i class="iconfont icon-iconfontzuojiantou" ></i>
                 </label>
                 <h3>
-                    17岁
-                    <p>刘德华</p>
-                    <!-- {{details.name}}
-                    <p v-for="(item,index) in details.ar" :key="index">
+                    <!-- 17岁
+                    <p>刘德华</p> -->
+                    {{$store.state.audioPlay.details[0].name}}
+                    <p v-for="(item,index) in $store.state.audioPlay.details[0].ar" :key="index">
                         {{item.name}}
-                    </p> -->
+                    </p>
                 </h3>
             </div>
             <div><i class="iconfont icon-fenxiang"></i></div>
@@ -23,7 +23,7 @@
             <footer-component></footer-component>
         </div>
         <div class="bgFilter">
-            <div style="backgroundImage:url(http://p1.music.126.net/-6osWky_WObfAydYYiTvpA==/3236962232773608.jpg)"></div>
+            <div :style="`backgroundImage:url(${$store.state.audioPlay.details[0].al.picUrl})`"></div>
         </div>
     </div>
 </template>
@@ -41,6 +41,14 @@ export default {
     },
     components: {
         footerComponent,audioImg
+    },
+    methods: {
+        /**
+         * 关闭播放详情页
+         */
+        goBack() {
+            this.$store.dispatch('updateAudioPageStatus',false);
+        }
     }
 }
 </script>
@@ -70,7 +78,7 @@ export default {
                     margin-left: 1%;
                     p {
                         font-size: 1rem;
-                        color: #b9b9b9;
+                        color: #ddd;
                     }
                 }
             }

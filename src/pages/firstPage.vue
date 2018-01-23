@@ -42,13 +42,15 @@
         <router-view/>
     </section>  
     <footer class="footer">
-        footer
+        <FooterBar></FooterBar>
     </footer> 
   </div>
 </template>
 
 <script>
 import TopBar from '../components/topBar.vue';
+
+import FooterBar from '../components/footer-bar';
 export default {
     data() {
         return {
@@ -56,7 +58,7 @@ export default {
         }
     },
     components: {
-        TopBar
+        TopBar,FooterBar
     },
     beforeRouteEnter (to, from, next) {
         // 在渲染该组件的对应路由被 confirm 前调用

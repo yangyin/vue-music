@@ -1,11 +1,11 @@
 <template>
     <scroller :on-infinite="infinite"  :on-refresh="refresh" ref="myscroller">
-        <ul class="list">
-            <li v-for="item of items" :key="item.id">
-                <div>
-                    <p>{{item.name}}</p>
-                    <label v-for="(obj,index) of item.artists" :key="obj.id">
-                        <span>{{obj.name | re_space}}</span>
+        <ul class="list" @click="clickHandler($event)">
+            <li v-for="item of items" :key="item.id" :data-id="item.id">
+                <div :data-id="item.id">
+                    <p :data-id="item.id">{{item.name}}</p>
+                    <label v-for="(obj,index) of item.artists" :key="obj.id" :data-id="item.id">
+                        <span :data-id="item.id">{{obj.name | re_space}}</span>
                         <i v-if="index < item.artists.length-1">/</i>
                     </label>
                 </div>
@@ -26,6 +26,7 @@ export default {
             total:0,//总页数
             current_page:0,//当前页
             items:[],//列表数组
+            clickId:0
         }
     },
     subscriptions() {
@@ -95,7 +96,47 @@ export default {
                     done();
                 })
             })            
+        },
+        clickHandler(event) {
+           
+            let id = event.target.getAttribute('data-id');
+            //  console.log('****id',id)
+            this.$store.dispatch('getSingleAction',id);
+            this.clickId = id;
+
+            let storageList = JSON.parse(this.$storage.get('auditionList'));
+            if( storageList && this.$storage.is_exist('auditionList',this.clickId) ) {
+                // let bol = this.$storage.is_exist('auditionList',this.clickId);
+                // console.log('****bol',bol);
+                // console.log('storage list ****',storageList);
+                this.$store.dispatch('footerList',{msg:storageList,id:this.clickId});
+            }
+
         }        
+    },
+    watch: {
+        '$store.state.audioPlay.id':function(val,old) {
+            // console.log('watch****',val);
+            let bol = this.$storage.is_exist('auditionList',this.clickId);
+            // console.log('****bol',bol);
+            if(this.clickId == val) {
+                if(!bol) {
+                    // console.log('****',this.$store.state.audioPlay.details[0]);
+                    let obj = this.$store.state.audioPlay.details[0];
+                    if(obj.id == this.clickId) {
+                        obj.isChecked = true;
+                    } else {
+                        obj.isChecked = false;
+                    }
+                    this.$storage.push('auditionList',obj);
+                }
+                // console.log('watch list****',JSON.parse(this.$storage.get('auditionList')));
+                let storageList = JSON.parse(this.$storage.get('auditionList'));
+                this.$store.dispatch('footerList',{msg:storageList,id:this.clickId});
+            }
+
+             
+        }
     },
     filters: {
         re_space:(val) =>{

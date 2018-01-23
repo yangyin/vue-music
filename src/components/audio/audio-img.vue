@@ -7,7 +7,7 @@
             </div>
             <div class="record-cover">
                 <div class="record-bg">
-                    <img  src="http://p1.music.126.net/-6osWky_WObfAydYYiTvpA==/3236962232773608.jpg" alt="">
+                    <img :style="`backgroundImage:url(${$store.state.audioPlay.details[0].al.picUrl})`" alt="">
                 </div>
             </div>
         </div>
@@ -64,8 +64,9 @@ export default {
                 justify-content: center;
                 align-items: center;
                 img {
-                    width: 70%;
+                    width: 70%;height: 70%;
                     border-radius: 50%;
+                    background-size: 100%;
                 }
             }
         }

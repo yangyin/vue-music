@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="$store.state.audioPlay.details">
     <div class="content" @click="handleCont">
         <div class="left">
             <img :src="$store.state.audioPlay.details[0].al.picUrl" alt="">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div v-if="groupStatus">
-        <GroupPage @close-bg="closeDialog"></GroupPage>
+        <GroupPage @close-bg="closeDialog" @click-id="childClickId"></GroupPage>
     </div>
 </div>
 
@@ -57,6 +57,7 @@ export default {
         */ 
         handleCont() {
             console.log(1)
+            this.$store.dispatch('updateAudioPageStatus',true);
         },
         /*
             点击列表展示
@@ -65,16 +66,27 @@ export default {
             /**
              * 把底部列表页的歌单数据存储在store中footerList,与试听共存在一个字段
              */
-            // console.log('message********',this.$props.message)
+            // console.log('message********',this.$props.message.length)
             // console.log('list*******',this.list)
-            if(this.$props.message.tracks) {
-                this.$store.dispatch('footerList',this.$props.message.tracks);
+            if(this.$props.message && this.$props.message.length>0) {
+                this.$store.dispatch('footerList',{msg:this.$props.message});
             }
-            
             this.groupStatus = true;
         },
          closeDialog(val) {
             this.groupStatus = false;
+        },
+        /**
+         * 弹出框选中的Li
+         */
+        childClickId(id) {
+            // console.log(id);
+            let list = this.$store.state.footerList;
+            this.$store.dispatch('footerList',{msg:list,id:id});
+            this.$store.dispatch('getSongsData',id);
+
+            // console.log('******',this.$store.state.footerList)
+            
         }
     },
     watch: {
@@ -97,7 +109,7 @@ export default {
     align-items: center;
     justify-content: center;
     .left {
-        width: 80%;
+        width: 70%;
         box-sizing: border-box;
         display: flex;
         justify-content: flex-start;
@@ -119,7 +131,7 @@ export default {
         }
     }
     .right {
-        width: 20%;
+        width: 25%;
         box-sizing: border-box;
         text-align: right;
         margin-right: 1rem;

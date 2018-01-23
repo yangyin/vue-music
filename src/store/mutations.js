@@ -14,7 +14,12 @@ const mutations = {
         state.isPlay = val;
     },
     [type.FOOTERLIST](state,val) {
+        // console.log('mutations footer list****',val);
+        state.footerList = [];
         state.footerList = val;
+    },
+    [type.AUDIOPAGESTATUS](state,val) {
+        state.audioPageStatus = val;
     }
 }
 

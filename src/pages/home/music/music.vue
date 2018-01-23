@@ -12,7 +12,7 @@
             </div>
             <div>
                 <i class="iconfont icon-yinle"></i>
-                <p>歌单</p>
+                <p>精品歌单</p>
             </div>
             <div>
                 <i class="iconfont icon-regepaihangbang"></i>

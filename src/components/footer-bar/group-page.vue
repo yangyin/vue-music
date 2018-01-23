@@ -12,9 +12,13 @@
         </div>
         <ul class="list" @click="handleLi($event)">
             <li v-for="(item,index) in $store.state.footerList" :key="item.id" :data-id="item.id">
-                <div class="list_com" :data-id="item.id">
-                    <p :data-id="item.id">{{item.name}}</p>
-                    <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}}/ </label>
+                <div class="list_com" :class="{'list-active':item.isChecked}" :data-id="item.id">
+                    <i class="iconfont icon-shengyin" v-if="item.isChecked"></i>
+                    <p :data-id="item.id">{{item.name}} - </p> 
+                    <span>
+                        <label v-for="obj in item.ar" :key="obj.id" :data-id="item.id">{{obj.name}} </label>
+                    </span>
+                    
                 </div>
                 <div class="list-right">
                     <i>X</i>
@@ -41,9 +45,14 @@ export default {
                },500)
             }
         },
-        handleLi(e) {
-            console.log(e)
+        handleLi(event) {
+            let id = event.target.getAttribute('data-id');
+            // console.log(id)
+            this.$emit('click-id',id);
         }
+    },
+    watch: {
+        
     }
 }
 </script>
@@ -111,14 +120,42 @@ export default {
                     box-sizing: border-box;
                     width: 80%;
                     margin-left: .5rem;
-                    p  {
-                        margin-right: 1rem;
+                    align-items: center;
+                    i {
+                        margin-right: .5rem;
+                        font-size: 1rem;
                     }
-                    label {
+                    p  {
+                        margin-right: .2rem;
+                        font-size: 1.3rem;
+                        white-space: nowrap;
+                    }
+                    span {
                         overflow: hidden;/*内容超出后隐藏*/
                         text-overflow: ellipsis;/* 超出内容显示为省略号*/
                         white-space: nowrap;/*文本不进行换行*/
+                        label {
+                            
+                            font-size: .1rem;
+                            color:#999;
+                        }
+                        label:after {
+                            content: '/';
+                        }
+                        label:last-child::after {
+                            display: none;
+                        } 
                     }
+                    
+                }
+                .list-active {
+                    color: red;
+                    span {
+                        label {
+                            color:red;
+                        }
+                    }
+                   
                 }
                 .list-right {
                     width: 10%;

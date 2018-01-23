@@ -14,7 +14,7 @@
                 </div>
                 
                 <div slot="right" class="title-right">
-                    <router-link to="/" >
+                    <router-link to="/search">
                         <i class="iconfont icon-sousuo"></i>
                     </router-link>
                     <i class="iconfont icon-fengexianICONCopy"></i> 
@@ -60,9 +60,18 @@ export default {
     },
     methods: {
         onSelectType (id) {
+            let current_audio_play = this.$store.state.audioPlay;
+            this.data.playlist.tracks.forEach(item => {
+                if(item.id == id) {
+                    item['isChecked'] = true;
+                } else {
+                    item['isChecked'] = false;
+                }
+            })
+
+            this.dialogList = this.data.playlist.tracks;
+            // console.log('arr******', this.data.playlist);
             
-            this.dialogList = this.data.playlist;
-            // console.log('dialogList******',this.dialogList);
             // this.$store.dispatch('songInfo/getSongsData',id);
             //播放器播放单曲，所以store到公共区域
             this.$store.dispatch('getSongsData',id);
