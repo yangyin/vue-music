@@ -3,7 +3,7 @@
 > A Vue.js project
 
 ## 技术栈
-vue vue-router rxjs vuex sass
+vue vue-router rxjs vuex sass async
 
 ## Build Setup
 
