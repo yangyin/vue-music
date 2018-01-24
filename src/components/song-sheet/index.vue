@@ -75,6 +75,7 @@ export default {
             // this.$store.dispatch('songInfo/getSongsData',id);
             //播放器播放单曲，所以store到公共区域
             this.$store.dispatch('getSongsData',id);
+            this.$store.dispatch('footerList',{msg:this.dialogList,id:id});
             // this.$store.dispatch('playStatus',true);
 
         },

@@ -72,6 +72,7 @@ export default {
         width: 100%;
         height: 33rem;
         background: #fff;
+        color: #666;
         .title {
             display: flex;
             align-items: center;

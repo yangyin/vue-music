@@ -56,7 +56,7 @@ export default {
             点击全局，显示到播放页面 <audio>
         */ 
         handleCont() {
-            console.log(1)
+            // console.log(1)
             this.$store.dispatch('updateAudioPageStatus',true);
         },
         /*
