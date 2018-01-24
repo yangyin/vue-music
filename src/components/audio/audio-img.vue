@@ -2,7 +2,7 @@
     <div class="audio-img">
         <div class="audio-img-top">
             <div data-v-62b3c5ac="" class="player-line"></div>
-            <div class="player-needle">
+            <div class="player-needle" :class="$store.state.isPlay? 'player-play':'player-pause'">
                 <img src="../../assets/player-needle.png" alt="">
             </div>
             <div class="record-cover">
@@ -44,9 +44,19 @@ export default {
             left: 46%;
             height: 10rem;
             z-index: 1;
+            transform-origin: 0 0;
+            
             img {
                 height: 100%;
             }
+        }
+        .player-play {
+            animation: pointover 1s 1;
+            animation-fill-mode: forwards;
+        }
+        .player-pause {
+            animation: pointleave 1s 1;
+            animation-fill-mode: forwards;
         }
         .record-cover {
             width: 100%;
@@ -96,6 +106,22 @@ export default {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+@keyframes pointover {
+    from {
+        transform: rotate(-34deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+@keyframes pointleave {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-34deg);
     }
 }
 </style>
