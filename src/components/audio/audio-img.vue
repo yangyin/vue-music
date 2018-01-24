@@ -32,6 +32,7 @@ export default {
     margin-top: 20px;
     position: relative;
     overflow: hidden;
+    flex:1;
     .audio-img-top {
         margin-bottom: 2rem;
         .player-line {
@@ -75,6 +76,10 @@ export default {
         display: flex;
         justify-content: space-around;
         width: 80%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2rem;
         margin: 0 auto;
         i {
             font-size: 2rem;

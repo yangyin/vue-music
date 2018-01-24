@@ -99,6 +99,7 @@ export default {
             flex:1;  
             overflow:auto; 
             color: #fff; 
+            display: flex;
         } 
         .footer {
             color: #fff;
