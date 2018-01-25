@@ -7,7 +7,9 @@
         </div>
         <div class="player-conctrl">
             <div class="play-mode" @click="playOrder">
-                <i class="iconfont icon-shunxubofang"></i>
+                <i v-if="audioControls.mode == 1" class="iconfont icon-shunxubofang"></i>
+                <i v-if="audioControls.mode == 2" class="iconfont icon-suiji-copy-copy"></i>
+                <i v-if="audioControls.mode == 0" class="iconfont icon-danquxunhuan"></i>
             </div>
 
             <div class="prev" @click="prevHandler"><i class="iconfont icon-shangyishou"></i></div>
@@ -30,6 +32,7 @@
 
 <script>
 import RangeSlider from 'vue-range-slider'
+import { mapState } from 'vuex'
 // you probably need to import built-in style
 import 'vue-range-slider/dist/vue-range-slider.css'
 import GroupPage from '../footer-bar/group-page.vue';
@@ -43,6 +46,10 @@ export default {
     components: {
         RangeSlider,GroupPage
     },
+    computed:mapState([
+        'audioControls'
+    ])
+    ,
     methods:{
         play() { //暂停
             this.$store.dispatch('playStatus',false);
@@ -94,7 +101,15 @@ export default {
            
         },
         playOrder() {
-
+            let mode = this.audioControls.mode;
+            if(mode == 1) {
+                mode =2;
+            } else if(mode == 2) {
+                mode =0;
+            } else {
+                mode =1;
+            }
+            this.$store.dispatch('updateAudioControls',{mode:'mode',val:mode});
         },
         /*
             点击列表展示

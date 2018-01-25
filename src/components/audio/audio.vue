@@ -3,8 +3,8 @@
     <audio 
         :src="$store.state.audioPlay.url" 
         autoplay
-        loop="loop" 
-        ref="audio" 
+        ref="audio"
+        :loop="audioControls.loop" 
         @timeupdate="timeupdate" 
         @play="startPlay" 
         @ended="audioEnd" 
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
@@ -27,9 +28,9 @@ export default {
     created() {
         
     },
-    computed:{
-
-    },
+    computed:mapState([
+        'audioControls','footerList'
+    ]),
     methods: {
         /*
             相当于 setTimeout，播放时，歌曲走的时间
@@ -47,6 +48,38 @@ export default {
             播放结束时执行
         */ 
         audioEnd() {
+            console.log('audio end')
+            console.log('***',this.footerList)
+            let mode = this.audioControls.mode;
+            let list = this.footerList;
+
+            if(mode == 1) {
+                // this.loop = false;
+                for(let i =0,len = list.length; i< len;i++) {
+                    if(list[i].isChecked == true) {
+                        let id = 0;
+                        if(i == len-1) {
+                            id = list[0].id;
+                            list[i].isChecked = false;
+                            list[0].isChecked = true;
+                        } else {
+                            id = list[i+1].id;
+                            list[i].isChecked = false;
+                            list[i + 1].isChecked = true;
+                        }
+                        
+                        this.$store.dispatch('footerList',{msg:list,id:id}); //改变弹出框中 选中的item的isChecked字段
+                        this.$store.dispatch('getSongsData',id); // 改变的是 当前播放歌曲
+                        break;
+                    }
+                }
+            } else if( mode ==2) {
+
+                // this.loop = false;
+            } else {
+                // this.loop = true;
+            }
+            
 
         },
         /*
@@ -62,6 +95,12 @@ export default {
         */ 
         volumechange() { 
             // this.$refs.audio.volume = this.$store.state.playInfo.volume / 100;
+        },
+        RandomNum(Min, Max) { // 随机数
+            var Range = Max - Min;
+            var Rand = Math.random();
+            var num = Min + Math.floor(Rand * Range); //舍去
+            return num;
         }
 
     },

@@ -71,6 +71,9 @@ const actions = {
      */
     updateAudioPageStatus(context,val) {
         context.commit(type.AUDIOPAGESTATUS,val);
+    },
+    updateAudioControls(context,obj) {
+        context.commit(type.AUDIOCONTROLS,obj);
     }
 
 }

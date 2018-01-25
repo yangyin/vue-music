@@ -17,3 +17,8 @@ export const FOOTERLIST = 'FOOTERLIST';
  * 播放器详情页 是否显示
  */
 export const AUDIOPAGESTATUS = 'AUDIOPAGESTATUS';
+
+/**
+ * 播放器控制器
+ */
+export const AUDIOCONTROLS = 'AUDIOCONTROLS';

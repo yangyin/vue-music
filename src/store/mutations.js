@@ -20,6 +20,10 @@ const mutations = {
     },
     [type.AUDIOPAGESTATUS](state,val) {
         state.audioPageStatus = val;
+    },
+    [type.AUDIOCONTROLS](state,obj) {
+        // console.log(obj)
+        state.audioControls[obj.mode] = obj.val;
     }
 }
 
