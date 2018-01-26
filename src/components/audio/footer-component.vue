@@ -101,15 +101,7 @@ export default {
            
         },
         playOrder() {
-            let mode = this.audioControls.mode;
-            if(mode == 1) {
-                mode =2;
-            } else if(mode == 2) {
-                mode =0;
-            } else {
-                mode =1;
-            }
-            this.$store.dispatch('updateAudioControls',{mode:'mode',val:mode});
+            this.$store.dispatch('updateAudioControls',{mode:'mode'});
         },
         /*
             点击列表展示

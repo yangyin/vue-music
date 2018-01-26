@@ -54,7 +54,6 @@ export default {
             let list = this.footerList;
 
             if(mode == 1) {
-                // this.loop = false;
                 for(let i =0,len = list.length; i< len;i++) {
                     if(list[i].isChecked == true) {
                         let id = 0;
@@ -74,8 +73,19 @@ export default {
                     }
                 }
             } else if( mode ==2) {
-
-                // this.loop = false;
+                let index = this.RandomNum(0,list.length);
+                let id = 0;
+                for(var i = 0,len = list.length; i< len;i++) {
+                    
+                    if(i == index) {
+                        id = list[i].id;
+                        list[i].isChecked = true;
+                    } else {
+                        list[i].isChecked = false;
+                    }
+                }
+                this.$store.dispatch('footerList',{msg:list,id:id}); //改变弹出框中 选中的item的isChecked字段
+                this.$store.dispatch('getSongsData',id); // 改变的是 当前播放歌曲
             } else {
                 // this.loop = true;
             }

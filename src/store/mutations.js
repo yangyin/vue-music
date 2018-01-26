@@ -23,7 +23,25 @@ const mutations = {
     },
     [type.AUDIOCONTROLS](state,obj) {
         // console.log(obj)
-        state.audioControls[obj.mode] = obj.val;
+        if(obj.mode == 'mode') {
+            let mode = state.audioControls.mode;
+            let loop = state.audioControls.loop;
+            if(mode == 1) {
+                mode =2;
+                loop = false;
+            } else if(mode == 2) {
+                mode =0;
+                loop = true;
+            } else {
+                mode =1;
+                loop = false;
+            }
+            state.audioControls['mode'] = mode;
+            state.audioControls['loop'] = loop;
+        } else {
+            state.audioControls[obj.mode] = obj.val;
+        }
+        
     }
 }
 
