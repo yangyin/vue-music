@@ -3,7 +3,12 @@
     <div class="group-page" :class=" isClass ? 'addMove' : 'removeMove' ">
         <div class="title">
             <div class="left">
-                <p><i class="iconfont icon-shunxubofang"></i>列表循环（{{$store.state.footerList.length}}）</p>
+                <p @click="playOrder">
+                    <label v-if="audioControls.mode == 1"><i class="iconfont icon-shunxubofang"></i>列表循环</label>
+                    <label v-if="audioControls.mode == 2"><i class="iconfont icon-suiji-copy-copy"></i>随机播放</label>
+                    <label v-if="audioControls.mode == 0"><i class="iconfont icon-danquxunhuan"></i>单曲循环</label>
+                    （{{$store.state.footerList.length}}）
+                </p>
             </div>
             <div class="right">
                 <span><i class="iconfont icon-wenjianjia"></i>收藏全部</span>
@@ -30,12 +35,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
             isClass:true
         }
     },
+    computed:mapState([
+        'audioControls'
+    ]),
     methods: {
         bgHandle(e) {
             if(e.target.className.includes('group-bg')) {
@@ -49,7 +58,10 @@ export default {
             let id = event.target.getAttribute('data-id');
             // console.log(id)
             this.$emit('click-id',id);
-        }
+        },
+        playOrder() { // 控制播放模式
+            this.$store.dispatch('updateAudioControls',{mode:'mode'});
+        },
     },
     watch: {
         

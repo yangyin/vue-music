@@ -48,8 +48,7 @@ export default {
     },
     computed:mapState([
         'audioControls'
-    ])
-    ,
+    ]),
     methods:{
         play() { //暂停
             this.$store.dispatch('playStatus',false);
@@ -100,7 +99,7 @@ export default {
             // console.log(index);
            
         },
-        playOrder() {
+        playOrder() { //控制播放模式
             this.$store.dispatch('updateAudioControls',{mode:'mode'});
         },
         /*
