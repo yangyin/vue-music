@@ -39,8 +39,9 @@ export default {
             const audioid = this.$refs.audio;
             if(this.progressTime != Math.round(audioid.currentTime) || this.progressTime == 0) {
                  this.progressTime = Math.round(audioid.currentTime)
+                 
                 // console.log('progressTime******',this.progressTime)
-                // this.$store.dispatch('progressTime',this.progressTime);
+                this.$store.dispatch('updateAudioControls',{mode:'progressTime',val:this.progressTime});
             }
            
         },
@@ -126,13 +127,6 @@ export default {
                 this.$refs.audio.play();
             }
         },
-        /*
-            监听音量
-        */ 
-        // '$store.state.playInfo.volume':function(val) {
-        //     // console.log(val)
-        //     this.volumechange();
-        // }
     }
 }
 </script>
