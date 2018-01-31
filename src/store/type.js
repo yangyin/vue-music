@@ -22,3 +22,4 @@ export const AUDIOPAGESTATUS = 'AUDIOPAGESTATUS';
  * 播放器控制器
  */
 export const AUDIOCONTROLS = 'AUDIOCONTROLS';
+

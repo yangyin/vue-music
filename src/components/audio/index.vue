@@ -16,8 +16,9 @@
             </div>
             <div><i class="iconfont icon-fenxiang"></i></div>
         </div>
-        <div class="content">
-            <audioImg></audioImg>
+        <div class="content" @click="controlHandler">
+            <audioImg v-if="controlPage"></audioImg>
+            <audioLy v-else></audioLy>
         </div>
         <div class="footer">
             <footer-component></footer-component>
@@ -33,14 +34,15 @@
 
 import footerComponent from './footer-component';
 import audioImg from './audio-img.vue';
+import audioLy from './audio-ly';
 export default {
     data() {
         return {
-            
+            controlPage:true // 控制显示 图片页 或者 歌词页
         }
     },
     components: {
-        footerComponent,audioImg
+        footerComponent,audioImg,audioLy
     },
     methods: {
         /**
@@ -48,6 +50,9 @@ export default {
          */
         goBack() {
             this.$store.dispatch('updateAudioPageStatus',false);
+        },
+        controlHandler() {
+            this.controlPage = !this.controlPage;
         }
     }
 }
@@ -113,7 +118,7 @@ export default {
                 width: 100%;height: 100%;
                 background-size: auto 100%;background-repeat: no-repeat;
                 transform: scale(1.5);transform-origin: top top;
-                filter: blur(30px) brightness(100%);
+                filter: blur(30px) brightness(70%);
                 transition: opacity .3s linear;
             }
         }

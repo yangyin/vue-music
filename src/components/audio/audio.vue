@@ -105,7 +105,7 @@ export default {
             控制音量
         */ 
         volumechange() { 
-            // this.$refs.audio.volume = this.$store.state.playInfo.volume / 100;
+            this.$refs.audio.volume = this.audioControls.volume / 100;
         },
         RandomNum(Min, Max) { // 随机数
             var Range = Max - Min;
@@ -127,6 +127,9 @@ export default {
                 this.$refs.audio.play();
             }
         },
+        'audioControls.volume':function(val,old) {
+            this.volumechange();
+        }
     }
 }
 </script>

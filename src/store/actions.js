@@ -75,6 +75,7 @@ const actions = {
     updateAudioControls(context,obj) {
         context.commit(type.AUDIOCONTROLS,obj);
     }
+    
 
 }
 
