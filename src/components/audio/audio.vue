@@ -3,6 +3,7 @@
     <audio 
         :src="$store.state.audioPlay.url" 
         autoplay
+        preload="auto"
         ref="audio"
         :loop="audioControls.loop" 
         @timeupdate="timeupdate" 
@@ -10,6 +11,7 @@
         @ended="audioEnd" 
         @volumechange="volumechange"
     >
+    <source :src="$store.state.audioPlay.url" type="audio/mpeg" />
         Your browser does not support the audio element.
     </audio> 
     
@@ -121,6 +123,11 @@ export default {
         */ 
         '$store.state.isPlay':function(val,old) {
             // console.log(val)
+            var currentTime=Date.now();
+            var protectTime=100;//设置保护性延时 单位毫秒，不要小于50 建议100以上
+            if((currentTime-lastRunTime)<protectTime){
+                return;//两次执行太过频繁，直接退出
+            }
             if(!val) {
                 this.$refs.audio.pause();
             } else {
