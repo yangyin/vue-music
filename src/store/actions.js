@@ -74,6 +74,9 @@ const actions = {
     },
     updateAudioControls(context,obj) {
         context.commit(type.AUDIOCONTROLS,obj);
+    },
+    setCurrentTimes(context,val) {
+        content.commit(type.SETCURRENTTIME,val);
     }
     
 

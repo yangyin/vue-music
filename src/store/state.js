@@ -12,6 +12,7 @@ let state = {
         progressTime:0,//当前播放位置
         mode:1,//歌曲播放方式   1=>列表循环 2 => 随机播放 0 => 单曲循环
         loop:false,//控制 单曲循环 或者 列表循环、随机播放
+        setCurrentTime:0,// 拖动进度条时，设置播放器 播放位置
     },
     currentLy:'', //当前歌曲的歌词
 }

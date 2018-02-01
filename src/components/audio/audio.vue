@@ -12,6 +12,7 @@
         @volumechange="volumechange"
     >
     <source :src="$store.state.audioPlay.url" type="audio/mpeg" />
+    <embed height="100" width="100" :src="$store.state.audioPlay.url" />
         Your browser does not support the audio element.
     </audio> 
     
@@ -62,7 +63,6 @@ export default {
                 // console.log('progressTime******',this.progressTime)
                 this.$store.dispatch('updateAudioControls',{mode:'progressTime',val:this.progressTime});
             }
-           
         },
         /*
             播放结束时执行
@@ -153,6 +153,9 @@ export default {
         },
         'audioControls.volume':function(val,old) {
             this.volumechange();
+        },
+        'audioControls.setCurrentTime':function(val,old) {
+            this.$refs.audio.currentTime = val;
         }
     }
 }

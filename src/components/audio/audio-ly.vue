@@ -5,12 +5,13 @@
             <range-slider class="slider" min="0" max="100" step="1" v-model="sliderValue"></range-slider>
             <label>{{sliderValue}}</label>
         </div>
-        <div class="ly"></div>
+        <div class="ly">{{audioControls}}</div>
     </div>
 </template>
 
 <script>
 import RangeSlider from 'vue-range-slider'
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
@@ -20,8 +21,9 @@ export default {
     components: {
         RangeSlider
     },
-    computed: {
-    },
+    computed:mapState([
+        'audioControls'
+    ]),
     watch: {
         'sliderValue':function(val,old) {
             this.$store.dispatch('updateAudioControls',{mode:'volume',val:val});

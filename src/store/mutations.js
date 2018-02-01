@@ -43,6 +43,10 @@ const mutations = {
             
         }
         
+    },
+    [type.SETCURRENTTIME](state,val) {
+        console.log('******',val)
+        state.audioControls.setCurrentTime = val;
     }
 }
 

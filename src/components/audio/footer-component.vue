@@ -1,10 +1,11 @@
 <template>
     <div class="audio-footer">
         <div class="audio-range">
-            <label>00.00</label>
-            <range-slider class="slider" min="0" max="100" step="1" v-model="sliderValue"></range-slider>
-            <label>04.11</label>
+            <label>{{audioControls.progressTime | timeFormat}}</label>
+            <range-slider class="slider" min="0" :max="audioPlay.details[0].dt/1000" step="1" v-model="sliderValue"></range-slider>
+            <label>{{audioPlay.details[0].dt/1000 | timeFormat}}</label>
         </div>
+        {{sliderValue}}
         <div class="player-conctrl">
             <div class="play-mode" @click="playOrder">
                 <i v-if="audioControls.mode == 1" class="iconfont icon-shunxubofang"></i>
@@ -39,16 +40,27 @@ import GroupPage from '../footer-bar/group-page.vue';
 export default {
     data() {
         return {
-            sliderValue: 50,
             groupStatus:false, //是否显示右侧弹出栏目 
         }
     },
     components: {
         RangeSlider,GroupPage
     },
-    computed:mapState([
-        'audioControls'
-    ]),
+    computed:{
+         ...mapState([
+            'audioControls','audioPlay'
+        ]),
+        sliderValue:{
+            get:function() {
+                return this.audioControls.progressTime
+            },
+            set:function(val) {
+                // console.log('val***',val)
+                // this.$store.dispatch('setCurrentTimes',val);
+                this.audioControls.setCurrentTime = val;
+            }
+        }
+    },
     methods:{
         play() { //暂停
             this.$store.dispatch('playStatus',false);
@@ -122,6 +134,15 @@ export default {
 
             // console.log('******',this.$store.state.footerList)
             
+        }
+    },
+    filters: {
+        timeFormat(value) {
+            let min = parseInt(value / 60)
+            let sec = parseInt(value % 60)
+            min = min < 10 ? '0' + min : min
+            sec = sec < 10 ? '0' + sec : sec
+            return min + ':' + sec
         }
     }
 }

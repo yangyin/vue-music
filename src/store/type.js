@@ -23,3 +23,9 @@ export const AUDIOPAGESTATUS = 'AUDIOPAGESTATUS';
  */
 export const AUDIOCONTROLS = 'AUDIOCONTROLS';
 
+/**
+ * 设置 播放器 当前播放位置
+ */
+export const SETCURRENTTIME = 'SETCURRENTTIME';
+
+
