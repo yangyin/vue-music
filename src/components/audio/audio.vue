@@ -1,6 +1,6 @@
 <template>
 <div>
-    <audio 
+    <audio id="music_mp3_0"
         :src="$store.state.audioPlay.url" 
         autoplay
         preload="auto"
@@ -33,6 +33,23 @@ export default {
     computed:mapState([
         'audioControls','footerList'
     ]),
+    mounted () {
+        document.addEventListener('DOMContentLoaded', function () {
+            function audioAutoPlay() {
+                var musicEle0 = document.getElementById('music_mp3_0');
+                musicEle0.play();
+            }
+            audioAutoPlay();
+        });
+        //--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
+        document.addEventListener('touchstart', function () {
+            function audioAutoPlay() {
+                var musicEle0 = document.getElementById('music_mp3_0');
+                musicEle0.play();
+            }
+            audioAutoPlay();
+        });  
+    },
     methods: {
         /*
             相当于 setTimeout，播放时，歌曲走的时间
@@ -123,11 +140,11 @@ export default {
         */ 
         '$store.state.isPlay':function(val,old) {
             // console.log(val)
-            var currentTime=Date.now();
-            var protectTime=100;//设置保护性延时 单位毫秒，不要小于50 建议100以上
-            if((currentTime-lastRunTime)<protectTime){
-                return;//两次执行太过频繁，直接退出
-            }
+            // var currentTime=Date.now();
+            // var protectTime=100;//设置保护性延时 单位毫秒，不要小于50 建议100以上
+            // if((currentTime-lastRunTime)<protectTime){
+            //     return;//两次执行太过频繁，直接退出
+            // }
             if(!val) {
                 this.$refs.audio.pause();
             } else {
