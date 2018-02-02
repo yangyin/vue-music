@@ -10,6 +10,7 @@
         @play="startPlay" 
         @ended="audioEnd" 
         @volumechange="volumechange"
+        @oncanplay="oncanplay"
     >
     <source :src="$store.state.audioPlay.url" type="audio/mpeg" />
     <embed height="100" width="100" :src="$store.state.audioPlay.url" />
@@ -35,23 +36,13 @@ export default {
         'audioControls','footerList'
     ]),
     mounted () {
-        document.addEventListener('DOMContentLoaded', function () {
-            function audioAutoPlay() {
-                var musicEle0 = document.getElementById('music_mp3_0');
-                musicEle0.play();
-            }
-            audioAutoPlay();
-        });
-        //--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
-        document.addEventListener('touchstart', function () {
-            function audioAutoPlay() {
-                var musicEle0 = document.getElementById('music_mp3_0');
-                musicEle0.play();
-            }
-            audioAutoPlay();
-        });  
+
     },
     methods: {
+        //当文件就绪可以开始播放时运行的脚本（缓冲已足够开始时）
+        oncanplay() {
+            console.log('oncanplay')
+        },
         /*
             相当于 setTimeout，播放时，歌曲走的时间
         */ 
@@ -139,17 +130,17 @@ export default {
             控制播放状态： 播放、暂停
         */ 
         '$store.state.isPlay':function(val,old) {
-            // console.log(val)
-            // var currentTime=Date.now();
-            // var protectTime=100;//设置保护性延时 单位毫秒，不要小于50 建议100以上
-            // if((currentTime-lastRunTime)<protectTime){
-            //     return;//两次执行太过频繁，直接退出
-            // }
-            if(!val) {
-                this.$refs.audio.pause();
-            } else {
-                this.$refs.audio.play();
+            let audio = this.$refs.audio;
+            if(audio != null) {
+                if(audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }   
             }
+             
+           
+        
         },
         'audioControls.volume':function(val,old) {
             this.volumechange();

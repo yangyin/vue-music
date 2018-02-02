@@ -77,6 +77,16 @@ const actions = {
     },
     setCurrentTimes(context,val) {
         content.commit(type.SETCURRENTTIME,val);
+    },
+    /**
+     * 获取歌词
+     * @param {*} context 
+     * @param {*} id 
+     */
+    async getLyric(context,id) {
+        let res = await server.getLyirc(id).toPromise();
+        console.log(res);
+        context.commit(type.GETLYRIC,res.lrc);
     }
     
 

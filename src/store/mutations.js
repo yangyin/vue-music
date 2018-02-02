@@ -22,7 +22,7 @@ const mutations = {
         state.audioPageStatus = val;
     },
     [type.AUDIOCONTROLS](state,obj) {
-        console.log(obj)
+        // console.log(obj)
         if(obj.mode == 'mode') {
             let mode = state.audioControls.mode;
             let loop = state.audioControls.loop;
@@ -45,8 +45,11 @@ const mutations = {
         
     },
     [type.SETCURRENTTIME](state,val) {
-        console.log('******',val)
+        // console.log('******',val)
         state.audioControls.setCurrentTime = val;
+    },
+    [type.GETLYRIC](state,val) {
+        state.audioPlay.lrc = val.lyric;
     }
 }
 

@@ -5,6 +5,7 @@ let state = {
         id:'',//当前播放歌曲的ID
         url:'',//当前播放歌曲的URL
         details:'',//当前播放歌曲的详情q
+        lrc:'',//当前播放歌曲的 歌词
     },
     footerList:[], // 底部footer 弹出框列表数据
     audioControls:{ // 音乐播放器控制器

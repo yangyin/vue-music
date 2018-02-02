@@ -28,4 +28,8 @@ export const AUDIOCONTROLS = 'AUDIOCONTROLS';
  */
 export const SETCURRENTTIME = 'SETCURRENTTIME';
 
+/**
+ * 获取 歌词
+ */
+export const GETLYRIC = 'GETLYRIC';
 
