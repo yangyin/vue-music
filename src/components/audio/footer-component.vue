@@ -48,7 +48,7 @@ export default {
     },
     computed:{
          ...mapState([
-            'audioControls','audioPlay'
+            'audioControls','audioPlay','isLyirc'
         ]),
         sliderValue:{
             get:function() {
@@ -84,6 +84,9 @@ export default {
                     }
                     this.$store.dispatch('footerList',{msg:list,id:id}); //改变弹出框中 选中的item的isChecked字段
                     this.$store.dispatch('getSongsData',id); // 改变的是 当前播放歌曲
+                    if(this.isLyirc) {
+                            this.$store.dispatch('getLyric',id);
+                    }
                     break;
                 }
             }
@@ -105,6 +108,9 @@ export default {
                     
                     this.$store.dispatch('footerList',{msg:list,id:id}); //改变弹出框中 选中的item的isChecked字段
                     this.$store.dispatch('getSongsData',id); // 改变的是 当前播放歌曲
+                    if(this.isLyirc) {
+                            this.$store.dispatch('getLyric',id);
+                    }
                     break;
                 }
             }

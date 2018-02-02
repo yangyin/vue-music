@@ -94,7 +94,7 @@ export default {
                 }
             }
 
-            if(parseInt(this.audioPlay.details[0].dt/1000) <= val) {
+            if(parseInt(this.audioPlay.details[0].dt/1000) <= val || val == 0) {
                 this.index=0;
                 this.$refs.lrcUl.style.top =0;
             }
