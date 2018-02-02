@@ -11,6 +11,7 @@
         @ended="audioEnd" 
         @volumechange="volumechange"
         @oncanplay="oncanplay"
+        @onerror="onerror"
     >
     <source :src="$store.state.audioPlay.url" type="audio/mpeg" />
     <embed height="100" width="100" :src="$store.state.audioPlay.url" />
@@ -43,6 +44,9 @@ export default {
         oncanplay() {
             console.log('oncanplay')
         },
+        onerror() {
+            console.log('audio onerror')
+        },
         /*
             相当于 setTimeout，播放时，歌曲走的时间
         */ 
@@ -59,11 +63,13 @@ export default {
             播放结束时执行
         */ 
         audioEnd() {
-            console.log('audio end')
-            console.log('***',this.footerList)
+            // console.log('audio end')
+            // console.log('***',this.footerList)
+            this.nextSong();
+        },
+        nextSong() {
             let mode = this.audioControls.mode;
             let list = this.footerList;
-
             if(mode == 1) {
                 for(let i =0,len = list.length; i< len;i++) {
                     if(list[i].isChecked == true) {
@@ -106,8 +112,6 @@ export default {
             } else {
                 // this.loop = true;
             }
-            
-
         },
         /*
         *    开始播放时，执行
@@ -144,15 +148,18 @@ export default {
                     audio.pause();
                 }   
             }
-             
-           
-        
         },
         'audioControls.volume':function(val,old) {
             this.volumechange();
         },
         'audioControls.setCurrentTime':function(val,old) {
             this.$refs.audio.currentTime = val;
+        },
+        '$store.state.audioPlay.url':function(val,old) {
+            // console.log('url ',val)
+            if(!val) {
+                this.nextSong();
+            }
         }
     }
 }
