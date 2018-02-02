@@ -5,7 +5,7 @@
             <range-slider class="slider" min="0" :max="audioPlay.details[0].dt/1000" step="1" v-model="sliderValue"></range-slider>
             <label>{{audioPlay.details[0].dt/1000 | timeFormat}}</label>
         </div>
-        {{sliderValue}}
+        <!-- {{sliderValue}} -->
         <div class="player-conctrl">
             <div class="play-mode" @click="playOrder">
                 <i v-if="audioControls.mode == 1" class="iconfont icon-shunxubofang"></i>

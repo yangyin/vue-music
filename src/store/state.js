@@ -15,7 +15,7 @@ let state = {
         loop:false,//控制 单曲循环 或者 列表循环、随机播放
         setCurrentTime:0,// 拖动进度条时，设置播放器 播放位置
     },
-    currentLy:'', //当前歌曲的歌词
+    isLyirc:false, //当前是否加载 歌词页面
 }
 
 export default state;

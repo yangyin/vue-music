@@ -33,3 +33,8 @@ export const SETCURRENTTIME = 'SETCURRENTTIME';
  */
 export const GETLYRIC = 'GETLYRIC';
 
+/**
+ * 判断是否在歌词显示页，是-> 通知播放当前歌曲结束时 更新歌词
+ */
+export const ISLYIRC = 'ISlYIRC';
+

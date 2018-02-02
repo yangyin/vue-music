@@ -50,6 +50,9 @@ const mutations = {
     },
     [type.GETLYRIC](state,val) {
         state.audioPlay.lrc = val.lyric;
+    },
+    [type.ISLYIRC](state,status) {
+        state.isLyirc = status;
     }
 }
 
