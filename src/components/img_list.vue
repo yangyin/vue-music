@@ -32,6 +32,7 @@
  * 5 isPlain:是否显示说明 默认：fasle
  * 6 plainPos 说明位置 默认：left bottom
  * 7 title:标题
+ *@event 返出点击事件 emit
  */
 export default {
     data() {
@@ -51,7 +52,7 @@ export default {
     },
     methods: {
         handleSongSheet(id) {
-            this.$router.push({ name: 'song_sheet',query:{id:id}});
+            this.$emit('child-click',id);
         }
     },
     watch: {

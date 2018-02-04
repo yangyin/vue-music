@@ -18,6 +18,9 @@ let server = {
     },
     getLyirc(id) {
         return http.get(api['lyric'],{id:id});
+    },
+    getMv(id) {
+        // return http.get(api[])
     }
 }
 export default server;

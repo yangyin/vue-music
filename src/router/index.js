@@ -69,6 +69,10 @@ export default new Router({
     path: '/song_sheet',
     name:'song_sheet',
     component: resolve => require(['../components/song-sheet/index.vue'], resolve)
+  },{
+    path: '/video',
+    name:'video',
+    component: resolve => require(['../components/video/index.vue'], resolve)
   }
 
     // {path:'/',redirect:'index'},

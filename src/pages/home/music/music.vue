@@ -19,9 +19,9 @@
                 <p>排行榜</p>
             </div>
         </div>
-        <img-list :message="recommended_list"></img-list>
-        <img-list :message="personalized_mv"></img-list>
-        <img-list :message="personalized_djprogram"></img-list>
+        <img-list :message="recommended_list"  @child-click="emitSongClick"></img-list>
+        <img-list :message="personalized_mv" @child-click="emitMvClick"></img-list>
+        <img-list :message="personalized_djprogram"  @child-click="emitDjClick"></img-list>
   </div>
 </template>
 
@@ -54,6 +54,23 @@ export default {
     },
     components: {
         slider,imgList
+    },
+    methods:{
+        // 推荐MV点击事件
+        emitMvClick(id) {
+            console.log(id);
+            // this.$router.push({ name: 'video',query:{id:id}});
+            alert('由于网易云API对 mv 视频 网易做了防盗链处理 , 不能播放。')
+        },
+        //推荐歌单
+        emitSongClick(id) {
+            this.$router.push({ name: 'song_sheet',query:{id:id}});
+        },
+        //推荐电台
+        emitDjClick(id) {
+            // this.$router.push({ name: 'song_sheet',query:{id:id}});
+            console.log('推荐电台ID：',id);
+        }
     },
     subscriptions () {
         // 获取slider滚动的图片
