@@ -84,7 +84,7 @@ export default {
             let list = this.$store.state.footerList;
             this.$store.dispatch('footerList',{msg:list,id:id});
             this.$store.dispatch('getSongsData',id);
-
+            // this.$store.dispatch('getLyric',id) //获取歌词
             // console.log('******',this.$store.state.footerList)
             
         }

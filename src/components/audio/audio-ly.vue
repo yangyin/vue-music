@@ -7,7 +7,7 @@
         </div>
        
         <div class="ly" >
-            <ul v-if="lrc" ref="lrcUl">
+            <ul v-if="lrc&& lrc.length>0" ref="lrcUl">
                 <li v-for="(value,key) in lrc" :key="key">
                     <!-- <label v-if="key == 0" :class="(audioControls.progressTime < lrc[1].num) ? 'li-active': ''"></label> -->
                     <label 
@@ -20,7 +20,7 @@
                 </li>
             </ul>
             <ul v-else>
-                <li>该歌曲目前暂无歌词！</li>  
+                <li style="color:#fff;">该歌曲目前暂无歌词！</li>  
             </ul>
         </div>
     </div>
@@ -63,21 +63,47 @@ export default {
     methods: {
         //解析歌词
         parseLrc(lrc) {
+            // console.log('*************',lrc);
+            // let lines = lrc.split('\n');
+            // let pattern = /\[\d{2}:\d{2}.\d{2}\]/g;
+            // let result = [];
+            // while (!pattern.test(lines[0])) {
+            // lines = lines.slice(1);
+            // }
+            // lines[lines.length - 1].length === 0 && lines.pop();
+            // for (let data of lines) {
+            // let index = data.indexOf(']');
+            // let time = data.substring(0, index + 1);
+            // let value = data.substring(index + 1);
+            // let timeString = time.substring(1, time.length - 2);
+            // let timeArr = timeString.split(':');
+            //     result.push({num:parseInt(timeArr[0], 10) * 60 + parseFloat(timeArr[1]),msg: value});
+            // }
+            // result.sort(function(a, b) {
+            // return a[0] - b[0];
+            // });
+            //  console.log(result)
+            //  return result;
             var lyrics = lrc.split("\n");
             let arr =[];
             var lrcObj = {};
             for (var i = 0; i < lyrics.length; i++) {
+
                 var lyric = decodeURIComponent(lyrics[i]);
                 var timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g;
                 var timeRegExpArr = lyric.match(timeReg);
+                // console.log('timeRegExpArr*****',timeReg)
                 if (!timeRegExpArr) continue;
                 var clause = lyric.replace(timeReg, '');
+                // console.log('clause***',clause);
                 for (var k = 0, h = timeRegExpArr.length; k < h; k++) {
                     var t = timeRegExpArr[k];
                     var min = Number(String(t.match(/\[\d*/i)).slice(1)),
                         sec = Number(String(t.match(/\:\d*/i)).slice(1));
                     var time = min * 60 + sec;
                     lrcObj[time] = clause;
+                    // console.log('lrc***',clause);
+                    // console.log('time****',time)
                     if(clause) {
                         arr.push({num:time,msg:clause})
                     }
@@ -85,6 +111,7 @@ export default {
                 }
                
             }
+            // console.log('arr****',arr);
             return arr;
         },  
     },
@@ -98,7 +125,7 @@ export default {
                 let liActive = document.querySelector('.li-active');
                 let key = liActive.getAttribute('data-key');
                 let allKey = liActive.getAttribute('data-all');
-                console.log('key****',key)
+                // console.log('key****',key)
                 if(key >=6 && (allKey - key) > 3) {
                     let offsetTop = liActive.offsetTop;
                     // if(this.offsetTop != offsetTop && offsetTop > 250) {
@@ -112,7 +139,10 @@ export default {
 
             if(parseInt(this.audioPlay.details[0].dt/1000) <= val || val == 0) {
                 // this.index=0;
-                this.$refs.lrcUl.style.top =0;
+                if(this.$refs.lrcUl) {
+                    this.$refs.lrcUl.style.top =0;
+                }
+                
             }
             
         }

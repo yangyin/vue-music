@@ -86,7 +86,12 @@ const actions = {
     async getLyric(context,id) {
         let res = await server.getLyirc(id).toPromise();
         // console.log(res);
-        context.commit(type.GETLYRIC,res.lrc);
+        if(res.lrc) {
+            context.commit(type.GETLYRIC,res.lrc);
+        } else {
+            context.commit(type.GETLYRIC,res.lrc);
+        }
+        
     },
     getLyircShow(content,status) {
         content.commit(type.ISLYIRC,status);

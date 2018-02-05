@@ -49,7 +49,12 @@ const mutations = {
         state.audioControls.setCurrentTime = val;
     },
     [type.GETLYRIC](state,val) {
-        state.audioPlay.lrc = val.lyric;
+        if(val) {
+            state.audioPlay.lrc = val.lyric;
+        } else {
+            state.audioPlay.lrc = '';
+        }
+        
     },
     [type.ISLYIRC](state,status) {
         state.isLyirc = status;
