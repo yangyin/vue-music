@@ -42,8 +42,8 @@ export default {
         this.$store.dispatch('getLyircShow',true);
         
     },
-    destroyed() {
-        this.store.dispatch('getLyircShow',false);
+    beforeDestroy() {
+        this.$store.dispatch('getLyircShow',false);
     },
     components: {
         RangeSlider
