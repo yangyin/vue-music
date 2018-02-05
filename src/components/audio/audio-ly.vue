@@ -8,9 +8,15 @@
        
         <div class="ly" >
             <ul v-if="lrc" ref="lrcUl">
-                <li v-for="(value,key) in lrc" :key="key" >
+                <li v-for="(value,key) in lrc" :key="key">
                     <!-- <label v-if="key == 0" :class="(audioControls.progressTime < lrc[1].num) ? 'li-active': ''"></label> -->
-                    <label v-if="key>0" :class="(audioControls.progressTime <= lrc[key].num && audioControls.progressTime > lrc[key-1].num ) ? 'li-active': ''"> {{ lrc[key-1].msg }}</label>   
+                    <label 
+                        v-if="key>0" 
+                        :data-key="key"
+                        :data-all="lrc.length"
+                        :class="(audioControls.progressTime < lrc[key].num && audioControls.progressTime > lrc[key-1].num ) ? 'li-active': ''"> 
+                        {{ lrc[key-1].msg }}
+                    </label>   
                 </li>
             </ul>
             <ul v-else>
@@ -27,8 +33,8 @@ export default {
     data() {
         return {
             sliderValue:this.$store.state.audioControls.volume,
-            offsetTop:0,
-            index:0,
+            // offsetTop:0,
+            // index:0,
         }
     },
     created () {
@@ -72,7 +78,10 @@ export default {
                         sec = Number(String(t.match(/\:\d*/i)).slice(1));
                     var time = min * 60 + sec;
                     lrcObj[time] = clause;
-                     arr.push({num:time,msg:clause})
+                    if(clause) {
+                        arr.push({num:time,msg:clause})
+                    }
+                    
                 }
                
             }
@@ -86,16 +95,23 @@ export default {
         },
         'audioControls.progressTime':function(val,old) {
             if(document.querySelector('.li-active')) {
-                let offsetTop = document.querySelector('.li-active').offsetTop;
-                if(this.offsetTop != offsetTop && offsetTop > 250) {
-                    this.offsetTop = offsetTop;
-                    this.$refs.lrcUl.style.top =this.index *-44 + 'px';
-                    this.index +=1; 
+                let liActive = document.querySelector('.li-active');
+                let key = liActive.getAttribute('data-key');
+                let allKey = liActive.getAttribute('data-all');
+                console.log('key****',key)
+                if(key >=6 && (allKey - key) > 3) {
+                    let offsetTop = liActive.offsetTop;
+                    // if(this.offsetTop != offsetTop && offsetTop > 250) {
+                        // this.offsetTop = offsetTop;
+                        this.$refs.lrcUl.style.top =(key-4) *-44 + 'px';
+                        // this.index +=1; 
+                    // }
                 }
+                
             }
 
             if(parseInt(this.audioPlay.details[0].dt/1000) <= val || val == 0) {
-                this.index=0;
+                // this.index=0;
                 this.$refs.lrcUl.style.top =0;
             }
             
