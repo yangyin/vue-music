@@ -19,8 +19,8 @@
                     </label>   
                 </li>
             </ul>
-            <ul v-else>
-                <li style="color:#fff;">该歌曲目前暂无歌词！</li>  
+            <ul v-else style="color:#fff;top:45%;">
+                <li>该歌曲目前暂无歌词！</li>  
             </ul>
         </div>
     </div>
