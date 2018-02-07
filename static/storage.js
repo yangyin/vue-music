@@ -17,7 +17,10 @@ const install = function(Vue) {
                 auditionList = JSON.parse(this.get(name));    
                 if(!auditionList) {
                     auditionList = [];
-                }           
+                } 
+                for(let i=0;i<auditionList.length;i++) {
+                    auditionList[i].isChecked = false;
+                }          
                 auditionList.push(val);
                 window.localStorage.setItem(name,JSON.stringify(auditionList))
                 return;
@@ -33,6 +36,21 @@ const install = function(Vue) {
                     return false;
                 } else {
                     return false;
+                }
+            },
+            delete(name,id) {
+                let auditionList = JSON.parse(this.get(name));
+                console.log('***',auditionList)
+                if(auditionList) {
+                    for(let i=0;i<auditionList.length;i++) {
+                        if(auditionList[i].id == id) {
+                            auditionList.splice(i,1);
+                            window.localStorage.setItem(name,JSON.stringify(auditionList));
+                            return auditionList;
+                        } 
+                    }
+                } else {
+                    return null;
                 }
             }
         }

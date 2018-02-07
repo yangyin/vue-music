@@ -73,6 +73,10 @@ export default new Router({
     path: '/video',
     name:'video',
     component: resolve => require(['../components/video/index.vue'], resolve)
+  },{
+    path: '/fine_song',
+    name:'fine_song',
+    component: resolve => require(['../pages/fine-song'], resolve)
   }
 
     // {path:'/',redirect:'index'},
