@@ -39,6 +39,9 @@ export default {
     post(url, data) {
         return Observable.fromPromise(
             axios({
+                xhrFields: {
+                    withCredentials: true
+                },
                 method: 'post',
                 url,
                 data: qs.stringify(data),
@@ -56,6 +59,9 @@ export default {
     get(url, params) {
         return Observable.fromPromise(
             axios({
+                xhrFields: {
+                    withCredentials: true
+                },
                 method: 'get',
                 baseURL: Config.baseURL,
                 url,

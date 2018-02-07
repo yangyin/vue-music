@@ -13,4 +13,5 @@ export default {
     'lyric':'lyric', //歌词
     'playlistDetail':'playlist/detail', //歌单列表
     'top_artists':'/top/artists',//热门歌手，搜索初始化
+    'highquality':'/top/playlist/highquality?limit=30', //精品歌单
 }

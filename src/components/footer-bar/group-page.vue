@@ -25,8 +25,8 @@
                     </span>
                     
                 </div>
-                <div class="list-right">
-                    <i>X</i>
+                <div class="list-right" @click.stop="del_item(item.id)">
+                    <i class="list-del">X</i>
                 </div>
             </li>
         </ul> 
@@ -55,9 +55,22 @@ export default {
             }
         },
         handleLi(event) {
-            let id = event.target.getAttribute('data-id');
+            let targets = event.target;
             // console.log(id)
-            this.$emit('click-id',id);
+            // console.log(targets.className)
+            if(!targets.className.includes('list-right') || !targets.className.includes('list-del')) {
+                // console.log('-------------------')
+                let id =  targets.getAttribute('data-id');
+                this.$emit('click-id',id);
+            }
+            
+        },
+        del_item(id) {
+            let arr = this.$storage.delete('auditionList',id);
+            console.log(arr);
+            if(arr) {
+                 this.$store.dispatch('footerList',{msg:arr});
+            }
         },
         playOrder() { // 控制播放模式
             this.$store.dispatch('updateAudioControls',{mode:'mode'});

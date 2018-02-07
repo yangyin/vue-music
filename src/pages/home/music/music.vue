@@ -10,10 +10,10 @@
                 <i class="iconfont icon-rili"></i>
                 <p>每日推荐</p>
             </div>
-            <div>
+            <router-link to="/fine_song" tag="div">
                 <i class="iconfont icon-yinle"></i>
                 <p>精品歌单</p>
-            </div>
+            </router-link>
             <div>
                 <i class="iconfont icon-regepaihangbang"></i>
                 <p>排行榜</p>
